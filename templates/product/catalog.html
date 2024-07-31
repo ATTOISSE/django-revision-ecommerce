@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+  {% if messages %}
+    <div class="alert alert-dismissible fade show" role="alert">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'success' }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+    <h2 class="text-center">Catalogue des produits</h2>
+  <div class="row">
+    {% for product in products %}
+      <div class="col-md-3">
+        <div class="card" style="width: 100%;">
+          <img class="card-img-top" src="{{ product.picture.url }}" alt="Card image cap" width="200" height="220" />
+          <div class="card-body">
+            <p class=" text-center card-title">Libellé : <b>{{product.wording}} </b></p>
+            <p class=" text-center card-text">Prix : <b>{{product.price |intcomma}} €</b></p>
+            <p class=" text-center card-text">Stock : <b>{{product.stock}} </b></p>
+            <a href="#" class="btn btn-primary offset-2">Ajouter au panier</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

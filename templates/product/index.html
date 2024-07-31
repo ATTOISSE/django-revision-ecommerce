@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if messages %}
+    <div class="alert alert-dismissible fade show" role="alert">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'success' }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<h2 class="text-center"><i>Liste des produits</i></h2>
+  <table class="table table-responsive">
+    <thead>
+      <th>Libelle</th>
+      <th>Prix</th>
+      <th>Stock</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      {% for product in products %}
+        <tr>
+          <td>{{product.wording}} </td>
+          <td>{{product.price}} </td>
+          <td>{{product.stock}} </td>
+          <td>
+            <a href="{% url "product.edit" product.id %}" class="btn btn-warning">Modifier</a>
+            <form action="{% url "product.delete" product.id %}" method="POST" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

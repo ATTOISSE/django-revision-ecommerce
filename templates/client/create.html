@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card col-6">
+        <div class="card-header bg-secondary text-white"><H3 class="text-center">Formulaire d'incription</H3></div>
+        <div class="card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn {% if client %}btn-success{% else %}btn-primary{% endif %} offset-4 col-3">{% if client %} Enregistrer {% else %} Ajouter {% endif %}</button>
+            </form>
+        </div>
+    </div>  
+{% endblock  %}
